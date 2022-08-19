@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Version } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Version,
+  VERSION_NEUTRAL,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -15,6 +25,13 @@ export class UserController {
   @Get()
   @Version('1')
   findAll() {
+    return this.userService.findAll();
+  }
+  @Get('findError')
+  @Version([VERSION_NEUTRAL, '1'])
+  findError() {
+    const a: any = {};
+    console.log(a.b.c);
     return this.userService.findAll();
   }
 
